@@ -1,4 +1,4 @@
-name: "foo::bar"
+name: "> assert foo"
 description: "Notes on Coding, Linux, etc."
 author: "Worblehat"
 markdown: rdiscount
