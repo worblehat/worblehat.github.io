@@ -1,10 +1,8 @@
-name: "Heather"
-description: "A Hyperminimal Jekyll Theme"
-author: "Jxnblk"
-
-# url: "http://localhost:4000"
-url: "http://jxnblk.github.io/Heather"
-
-exclude: [README.md, Rakefile]
-paginate: 16
+name: "foo::bar"
+description: "Notes on Coding, Linux, etc."
+author: "Worblehat"
+markdown: rdiscount
+#url: "http://localhost:4000"
+url: "http://worblehat.github.io"
+exclude: [README.md]
 permalink: /:title
