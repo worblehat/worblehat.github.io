@@ -5,4 +5,5 @@ markdown: rdiscount
 #url: "http://localhost:4000"
 url: "http://worblehat.github.io"
 exclude: [README.md]
+excerpt_separator: ""   #Disable automatic excerpts
 permalink: /:title
