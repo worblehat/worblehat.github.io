@@ -4,8 +4,15 @@
 <article class="post">
   <h1 class="post-title"><a href="{{ site.url }}{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></h1>
   <hr class="title-line">
+  <p>
   {{ content }}
+  </p>
+  <div style="float:left;">
+  <p class="small gray"><a href="{{ site.url }}" title="To the Homepage"</a>&lt;&lt; Back Home</p>
+  </div>
+  <div style="float:right;">
   <p class="small gray">Updated on <time datetime="{{ page.date | date: "%Y-%m-%d"}}">{{ page.date | date_to_long_string }}</time></p>
+  </div>
 </article>
 </main>
 {% include _footer.html %}
