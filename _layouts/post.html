@@ -33,8 +33,8 @@
   <!-- Include JQuery, needed for fetching the comments via the github api. -->
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
-  <!-- Include datejs for date formatting. -->
-  <!--<script type="text/jddavascript" src="http://datejs.googlecode.com/svn/trunk/build/date-en-US.js"></script>-->
+  <!-- Include xdate for date formatting. -->
+  <script type="text/javascript" src="../scripts/xdate.js"></script>
 
   <!-- Java script code to show comments from the related github issue. -->
   <script type="text/javascript">
@@ -46,8 +46,7 @@
             + data[i].url.substring(data[i].url.lastIndexOf("/")+1);
         var cbody = data[i].body_html;
         var cavatarlink = data[i].user.avatar_url;
-        var cdate = new Date(Date.parse(data[i].created_at)).toString();
-        //var cdate = Date.parse(data[i].created_at).toString("yyyy-MM-dd HH:mm:ss");
+        var cdate = new XDate(data[i].created_at).toString("MMM dd yyyy HH:mm");
 
         $("#comments").append("<div class='comment'><div class='commentheader'><div class='commentgravatar'>"
                 + '<img src="' + cavatarlink + '" alt="" width="20" height="20">' + "</div><a class='commentuser' href=\""
