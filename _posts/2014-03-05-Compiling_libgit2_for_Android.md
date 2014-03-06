@@ -2,7 +2,7 @@
 layout: post
 title: "Compiling libgit2 for Android"
 categories: [libgit2]
-date: 2014-03-05
+date: 2014-03-06
 commentIssueId: 2
 published: true 
 ---
@@ -11,9 +11,6 @@ This is a step-by-step guide to cross compiling [libgit2](http://libgit2.github.
 on a Linux system. The goal is to be able to use the git library written in C in Android
 applications via the [NDK (Native Development Kit)](https://developer.android.com/tools/sdk/ndk/index.html)
 and [JNI](http://developer.android.com/training/articles/perf-jni.html).
-
-**NOTE:** Here libgit2 will be compiled *without* the optional depenendcy OpenSSL, but I plan to write another
-article on how to include OpenSSL into the build (as soon as I figure it out).
 
 # Preparation
 
@@ -66,6 +63,16 @@ STANDALONE-TOOLCHAIN.html in NDK's documentation folder
 Everything needed to cross compile (compiler, NDK headers, libraries, ...) is installed now and 
 you are ready to actually build libgit2.
 
+# Optional Dependencies
+
+libgit2 has some optional dependencies to provide additional features.
+Threading support will be available, because the pthreads library is built into
+Android's C library.
+
+The other optional dependenices (OpenSSL, LibSSH2 and iconv) won't be available. It should be possible
+to cross compile and include them, but so far I haven't tried it. If you have any suggestions on this,
+please leave a comment!
+
 # Compile libgit2
 
 Download the [libgit2 sources](https://github.com/libgit2/libgit2/releases) and create a file named
@@ -85,7 +92,7 @@ SET(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 SET(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 ```
 
-Note that we use the $TOOLCHAIN variable again, so make sure it is set correctly or hardcode the path
+Note that we use the `$TOOLCHAIN` variable again, so make sure it is set correctly or hardcode the path
 to the toolchain installation.
 
 Then create a build directory and configure CMake from within. Make sure you set `$LIBGIT2_INSTALL`
@@ -97,18 +104,12 @@ $ cd build_android
 $ cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake \
         -DANDROID=1  \
         -DSONAME=0 \
+        -DTHREADSAFE=1 \
         -DCMAKE_INSTALL_PREFIX=$LIBGIT2_INSTALL \
         .. 
 ```
 
-Note that the output tells you:
-
-```Shell
-"Could NOT find OpenSSL"
-```
-As mentioned earlier this will be the subject of another article on this site.
-
-If you have a version of libgit2 that is older than version 0.21 you might get this error:
+If you have a version of libgit2 that is older than version 0.21, you might get this error:
 
 ```
 ld: error: cannot find -lrt
@@ -118,7 +119,7 @@ This can be fixed by
 [patching CMakelists.txt](https://github.com/libgit2/libgit2/commit/5af69ee96af6dfae0f9069c6cda5281861b0da5c)
 manually.
 
-If the configuration was successful only step left is to finally build libgit2.
+If the configuration was successful, the only step left is to finally build libgit2.
 
 ```Shell
 $ cmake --build . --target install
