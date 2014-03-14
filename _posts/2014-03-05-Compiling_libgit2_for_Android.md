@@ -2,7 +2,7 @@
 layout: post
 title: "Compiling libgit2 for Android"
 categories: [libgit2]
-date: 2014-03-06
+date: 2014-03-14
 commentIssueId: 2
 published: true 
 ---
@@ -103,13 +103,18 @@ $ mkdir build_android
 $ cd build_android
 $ cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake \
         -DANDROID=1  \
-        -DSONAME=0 \
+        -DBUILD_SHARED_LIBS=0 \
         -DTHREADSAFE=1 \
         -DCMAKE_INSTALL_PREFIX=$LIBGIT2_INSTALL \
         .. 
 ```
 
-If you have a version of libgit2 that is older than version 0.21, you might get this error:
+As `BUILD_SHARED_LIBS` is set to false, a static library will be built. This makes sense for Android
+because the library will be bundled with the application anyway. So even if you use a shared library,
+it will not really be shared among multiple apps that use it. Instead every app will have it's own 'shared'
+version of libgit2.
+
+If you have a version of libgit2 that is older than version 0.21, you might get this error when running cmake:
 
 ```
 ld: error: cannot find -lrt
@@ -125,5 +130,5 @@ If the configuration was successful, the only step left is to finally build libg
 $ cmake --build . --target install
 ```
 
-Congratulations! Now you have libgit2 built as a shared library for Android.  
+Congratulations! Now you have libgit2 built as a static library for Android.  
 An article on how to actually use this native library in an Android application will follow...
