@@ -2,6 +2,7 @@ name: "> assert foo"
 description: "Notes on Coding, Linux and more"
 author: "Worblehat"
 markdown: rdiscount
+highlighter: pygments
 #url: "http://localhost:4000"
 url: "http://worblehat.github.io"
 exclude: [README.md]

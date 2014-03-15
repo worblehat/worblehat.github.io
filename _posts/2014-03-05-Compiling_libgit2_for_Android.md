@@ -18,10 +18,10 @@ First of all you should [get the latest NDK](https://developer.android.com/tools
 Extract the archive to your disk and save the folder's path to an environment variable as this will be
 useful later.
 
-```shell
-$ tar xvzf android-ndk-r9c-linux-x86_64.tar.bz2
-$ export NDK=<path>/android-ndk-r9c-linux-x86_64
-```
+{% highlight bash %}
+tar xvzf android-ndk-r9c-linux-x86_64.tar.bz2
+export NDK=<path>/android-ndk-r9c-linux-x86_64
+{% endhighlight %}
 
 The version and architecture might be different for you
 and you need to replace `<path>` by whatever path you extracted the NDK to.
@@ -46,13 +46,13 @@ is targeting Android Platform level 9 for devices with ARM architecture.
 `$TOOLCHAIN` should be a path of your own choice where the toolchain
 will be installed. This is not really important because you are free to move the folder afterwards.
 
-```Shell
-$ $NDK/build/tools/make-standalone-toolchain.sh \
+{% highlight bash %}
+$NDK/build/tools/make-standalone-toolchain.sh \
     --toolchain=arm-linux-androideabi-clang3.3 \
     --platform=android-9 \
     --arch=arm \
     --install-dir=$TOOLCHAIN
-```
+{% endhighlight %}
 
 Of course you can choose another compiler, architecture or platform target to fit your needs.
 If your host system is 64Bit, 
@@ -79,7 +79,7 @@ Download the [libgit2 sources](https://github.com/libgit2/libgit2/releases) and 
 toolchain.cmake with the following content in it's root directory
 (actually you can create the file wherever you like as long as you provide the correct path to CMake later).
 
-```CMake
+{% highlight CMake %}
 SET(CMAKE_SYSTEM_NAME Linux)
 SET(CMAKE_SYSTEM_VERSION Android)
 
@@ -90,7 +90,7 @@ SET(CMAKE_FIND_ROOT_PATH $ENV{TOOLCHAIN}/sysroot/)
 SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 SET(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 SET(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
-```
+{% endhighlight %}
 
 Note that we use the `$TOOLCHAIN` variable again, so make sure it is set correctly or hardcode the path
 to the toolchain installation.
@@ -98,16 +98,16 @@ to the toolchain installation.
 Then create a build directory and configure CMake from within. Make sure you set `$LIBGIT2_INSTALL`
 (or replace it with) the path where you want the libgit2 binaries and header to be installed.
 
-```Shell
-$ mkdir build_android
-$ cd build_android
-$ cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake \
+{% highlight bash %}
+mkdir build_android
+cd build_android
+cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake \
         -DANDROID=1  \
         -DBUILD_SHARED_LIBS=0 \
         -DTHREADSAFE=1 \
         -DCMAKE_INSTALL_PREFIX=$LIBGIT2_INSTALL \
         .. 
-```
+{% endhighlight %}
 
 As `BUILD_SHARED_LIBS` is set to false, a static library will be built. This makes sense for Android
 because the library will be bundled with the application anyway. So even if you use a shared library,
@@ -116,9 +116,9 @@ version of libgit2.
 
 If you have a version of libgit2 that is older than version 0.21, you might get this error when running cmake:
 
-```
+{% highlight bash %}
 ld: error: cannot find -lrt
-```
+{% endhighlight %}
 
 This can be fixed by
 [patching CMakelists.txt](https://github.com/libgit2/libgit2/commit/5af69ee96af6dfae0f9069c6cda5281861b0da5c)
@@ -126,9 +126,9 @@ manually.
 
 If the configuration was successful, the only step left is to finally build libgit2.
 
-```Shell
-$ cmake --build . --target install
-```
+{% highlight bash %}
+cmake --build . --target install
+{% endhighlight %}
 
 Congratulations! Now you have libgit2 built as a static library for Android.  
 An article on how to actually use this native library in an Android application will follow...
