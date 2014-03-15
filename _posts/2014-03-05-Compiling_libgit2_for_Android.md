@@ -83,9 +83,9 @@ toolchain.cmake with the following content in it's root directory
 SET(CMAKE_SYSTEM_NAME Linux)
 SET(CMAKE_SYSTEM_VERSION Android)
 
-SET(CMAKE_C_COMPILER   $ENV{TOOLCHAIN}/bin/arm-linux-androideabi-clang)
-SET(CMAKE_CXX_COMPILER $ENV{TOOLCHAIN}/bin/arm-linux-androideabi-clang++)
-SET(CMAKE_FIND_ROOT_PATH $ENV{TOOLCHAIN}/sysroot/)
+SET(CMAKE_C_COMPILER   ${TOOLCHAIN}/bin/arm-linux-androideabi-clang)
+SET(CMAKE_CXX_COMPILER ${TOOLCHAIN}/bin/arm-linux-androideabi-clang++)
+SET(CMAKE_FIND_ROOT_PATH ${TOOLCHAIN}/sysroot/)
 
 SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 SET(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
