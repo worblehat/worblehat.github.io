@@ -2,7 +2,7 @@
 layout: post
 title: "Compiling libgit2 for Android"
 categories: [libgit2]
-modified: 2014-03-15 00:00:00
+modified: 2014-04-11 00:00:00
 commentIssueId: 2
 published: true 
 ---
@@ -69,9 +69,17 @@ libgit2 has some optional dependencies to provide additional features.
 Threading support will be available, because the pthreads library is built into
 Android's C library.
 
-The other optional dependenices (OpenSSL, LibSSH2 and iconv) won't be available. It should be possible
-to cross compile and include them, but so far I haven't tried it. If you have any suggestions on this,
-please leave a comment!
+The other optional dependenices (OpenSSL and LibSSH2) won't be available, unless you cross-compile them, too.
+Luckily, GitHub user [mevansam](https://github.com/mevansam/cmoss) created a couple of scripts capable of building
+some popular C/C++ open source libraries for Android. I created a [fork](https://github.com/worblehat/cmoss)
+with some minor modifications, tailored to build OpenSSL and LibSSH2 for Android. I configured it to work
+with NDK r9c, targeting the arm platform, but you can change some variables, like target platform and
+toolchain version in
+[`build-all.sh`](https://github.com/worblehat/cmoss/blob/libgit2/build-droid/build-all.sh#L91).
+
+After running `build-all.sh` just copy `libssh2.a`, `libssl.a`, `libcrypto.a` and `libgpg-error.a` to
+`$TOOLCHAIN/sysroot/usr/lib` and the corresponding headers to `$TOOLCHAIN/sysroot/usr/include`. 
+Then libgit2's build system will be able to find and link against them.
 
 # Compile libgit2
 
@@ -93,7 +101,7 @@ SET(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 {% endhighlight %}
 
 Note that we use the `$TOOLCHAIN` variable again, so make sure it is set correctly or hardcode the path
-to the toolchain installation.
+to the toolchain installation. The path should be absolute.
 
 Then create a build directory and configure CMake from within. Make sure you set `$LIBGIT2_INSTALL`
 (or replace it with) the path where you want the libgit2 binaries and header to be installed.
@@ -105,6 +113,7 @@ cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake \
         -DANDROID=1  \
         -DBUILD_SHARED_LIBS=0 \
         -DTHREADSAFE=1 \
+        -DBUILD_CLAR=0 \
         -DCMAKE_INSTALL_PREFIX=$LIBGIT2_INSTALL \
         .. 
 {% endhighlight %}
