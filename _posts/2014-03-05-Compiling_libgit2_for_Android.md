@@ -63,7 +63,7 @@ STANDALONE-TOOLCHAIN.html in NDK's documentation folder
 Everything needed to cross compile (compiler, NDK headers, libraries, ...) is installed now and 
 you are ready to actually build libgit2.
 
-# Optional Dependencies
+# <a id="Optional_Dependencies"></a>Optional Dependencies
 
 libgit2 has some optional dependencies to provide additional features.
 Threading support will be available, because the pthreads library is built into
