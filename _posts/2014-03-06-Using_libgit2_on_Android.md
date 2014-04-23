@@ -2,7 +2,7 @@
 layout: post
 title: "Using libgit2 on Android"
 categories: [libgit2]
-modified: 2014-04-23 00:00:00
+modified: 2014-04-23 12:00:00
 commentIssueId: 3
 published: true 
 ---
