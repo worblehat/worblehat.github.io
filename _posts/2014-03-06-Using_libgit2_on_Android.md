@@ -2,7 +2,7 @@
 layout: post
 title: "Using libgit2 on Android"
 categories: [libgit2]
-modified: 2014-04-19 00:00:00
+modified: 2014-04-23 00:00:00
 commentIssueId: 3
 published: true 
 ---
@@ -154,8 +154,7 @@ a shared library already included in the NDK.
 If you have built libgit2 with its optional dependencies OpenSSL and libssh2
 (see ['Optional Dependencies'](http://localhost:4000/Compiling_libgit2_for_Android/#Optional_Dependencies)),
 add the binaries and headers of OpenSSL, libssh2, libgcrypt and libgpg-error to `lib` and `include`
-respectively. Furthermore for each of them a module must be defined in Android.mk. The complete makefile can
-be found [here](https://gist.github.com/worblehat/11056229).
+respectively. Furthermore for each of them a module must be defined in Android.mk and added to `LOCAL_STATIC_LIBRARIES`. The complete makefile can be found [here](https://gist.github.com/worblehat/11056229).
 
 By now you have everything setup to actually build the project. The compilation of
 native modules is seperate from the usual build routine of the Android app itself.
