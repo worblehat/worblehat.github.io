@@ -2,7 +2,7 @@
 layout: post
 title: "Compiling libgit2 for Android"
 categories: [libgit2]
-modified: 2014-04-11 00:00:00
+modified: 2014-04-11 12:00:00
 commentIssueId: 2
 published: true 
 ---
@@ -84,7 +84,7 @@ Then libgit2's build system will be able to find and link against them.
 # Compile libgit2
 
 Download the [libgit2 sources](https://github.com/libgit2/libgit2/releases) and create a file named
-toolchain.cmake with the following content in it's root directory
+toolchain.cmake with the following content in its root directory
 (actually you can create the file wherever you like as long as you provide the correct path to CMake later).
 
 {% highlight CMake %}
@@ -120,7 +120,7 @@ cmake -DCMAKE_TOOLCHAIN_FILE=../toolchain.cmake \
 
 As `BUILD_SHARED_LIBS` is set to false, a static library will be built. This makes sense for Android
 because the library will be bundled with the application anyway. So even if you use a shared library,
-it will not really be shared among multiple apps that use it. Instead every app will have it's own 'shared'
+it will not really be shared among multiple apps that use it. Instead every app will have its own 'shared'
 version of libgit2.
 
 If you have a version of libgit2 that is older than version 0.21, you might get this error when running cmake:

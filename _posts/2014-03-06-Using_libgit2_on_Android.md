@@ -104,7 +104,7 @@ As the native part of the Android app depends on libgit2, you should copy its bi
 in your project directory. I like to keep them in `include` and `lib` directories
 under `jni/`. 
 
-Create an `Android.mk` file in `jni/`. It will be the build script for androids
+Create an `Android.mk` file in `jni/`. It will be the build script for Android's
 build system. Your jni directory structure should now look like this:
 
 {% highlight Bash %}
