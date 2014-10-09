@@ -1,5 +1,5 @@
-name: "> assert foo"
-description: "Notes on Coding, Linux and more"
+name: "Worblehat's Site"
+#description: "Notes on Coding, Linux and more"
 author: "Worblehat"
 markdown: rdiscount
 highlighter: pygments
