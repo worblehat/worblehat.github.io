@@ -141,4 +141,4 @@ cmake --build . --target install
 
 Congratulations! Now you have libgit2 built as a static library for Android.  
 Don't hesitate to leave a comment below and read my other post on
-[how to actually use libgit2 on Android](http://worblehat.github.io/Using_libgit2_on_Android/).
+[how to actually use libgit2 on Android](http://worblehat.github.io/Using_libgit2_on_Android).
