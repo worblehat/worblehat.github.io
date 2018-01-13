@@ -12,7 +12,7 @@ via Android's [NDK (Native Development Kit)](https://developer.android.com/tools
 and [JNI](http://developer.android.com/training/articles/perf-jni.html).
 
 **NOTE:** This is the continuation of my first post about
-[compiling libgit2 for Android](http://worblehat.github.io/Compiling_libgit2_for_Android/).
+[compiling libgit2 for Android](http://worblehat.github.io/Compiling_libgit2_for_Android).
 
 #Prerequisites
 
